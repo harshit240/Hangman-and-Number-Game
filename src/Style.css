@@ -1,0 +1,17 @@
+.a{
+    background: #b45454;
+    color: #fff;
+}
+.navbar{
+    background-color: #0000009e;
+}
+.navbar-nav li {
+    padding: 0 10px;
+    margin: left;
+}
+.navbar-nav li a {
+    color: #ffff!important;
+    font-size: 20px;
+    font-weight: bold;
+
+}

@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-
+import './Style.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HangMan from "./Component/HangMan"
+import Header from './Component/Header';
+import Footer from './Component/Footer';
+import Number from './Component/Number';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+      <Header/>
+        <Routes>
+          <Route exact path="/hangman" element={<HangMan />} />
+          <Route exact path="/number" element={<Number />} />
+        </Routes>
+        {/* <Footer/> */}
+      </BrowserRouter>
+    </>
   );
 }
 
