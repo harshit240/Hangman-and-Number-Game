@@ -41,10 +41,6 @@ const HangmanGame = () => {
         setTries((prevTries) => prevTries - 1);
       }
       setGuess('');
-    }else if (guess === word) {
-
-    } else {
-      
     }
 
     // Check if the word is fully guessed or all tries used
@@ -75,15 +71,15 @@ const HangmanGame = () => {
   };
 
   return (
-    <div>
+    <div style={{textAlign:"center",margin:"30px"}}>
       <h1>Hangman Game</h1>
       {/* <p>Tries remaining: {tries}</p> */}
       {!gameOver ? (
         <div>
           <p>Guess the word by entering letters</p>
           <form onSubmit={handleGuess}>
-            <input type="text" value={guess} onChange={handleChange} />
-            <button type="submit">Guess</button>
+            <input style={{color:"black",backgroundColor:"white",padding:"10px",margin:"10px"}} type="text" value={guess} onChange={handleChange} />
+            <button style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}} type="submit">Guess</button>
           </form>
         </div>
       ) : (
@@ -96,7 +92,7 @@ const HangmanGame = () => {
               <p></p>
             )
           }
-          <button onClick={handleRestart}>Restart</button>
+          <button onClick={handleRestart} style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}}>Restart</button>
         </div>
       )}
     </div>

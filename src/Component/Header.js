@@ -9,11 +9,10 @@ const Header = () => {
   };
   return (
     <>
-    <header>
-      <nav className={isNavOpen ? 'nav-active' : ''}>
+    <header style={{backgroundColor:"yellowgreen"}}>
+      <nav className={isNavOpen ? 'nav-active' : ''} >
         <div className="logo">
-          <h1>Logo
-          </h1>
+          <h1>Your Logo</h1>
         </div>
         <div className={`burger ${isNavOpen ? 'toggle' : ''}`} onClick={toggleNav}>
           <div className="line1"></div>
@@ -21,8 +20,8 @@ const Header = () => {
           <div className="line3"></div>
         </div>
         <ul className={`nav-links ${isNavOpen ? 'nav-active' : ''}`}>
-          <li><a href="/number">Number Game</a></li>
-          <li><a href="/hangman">Hangman Game</a></li>
+          <li ><a  href="/number">Number Game</a></li>
+          <li ><a  href="/hangman">Hangman Game</a></li>
         </ul>
       </nav>
     </header>

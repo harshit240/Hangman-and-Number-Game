@@ -46,22 +46,22 @@ const NumbersGame = () => {
   };
 
   return (
-    <div>
-      <h1>Numbers Game</h1>
+    <div style={{textAlign:"center",margin:"30px"}}>
+      <h1 style={{textAlign:"center",margin:"30px"}}>Numbers Game</h1>
       {tries > 0 && (
-        <>
-          <p>Guess the random number between 1 and 100.</p>
-          <p>Tries remaining: {tries}</p>
+        <div style={{textAlign:"center",margin:"30px"}}>
+          <p style={{textAlign:"center",margin:"30px"}}>Guess the random number between 1 and 100.</p>
+          <p style={{textAlign:"center",margin:"30px"}}>Tries remaining: {tries}</p>
           {result && <p>{result}</p>}
-          <form onSubmit={handleGuess}>
-            <input type="number" value={guess} onChange={handleChange} />
-            <button type="submit">Guess</button>
+          <form onSubmit={handleGuess} style={{textAlign:"center",margin:"30px"}}>
+            <input type="number" value={guess} onChange={handleChange} style={{color:"black",backgroundColor:"white",padding:"10px",margin:"10px"}}/>
+            <button type="submit" style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}}>Guess</button>
           </form>
-        </>
+        </div>
       )}
       {tries === 0 && (
         <>
-          <p>Game Over! You lost. The number was {randomNumber}.</p>
+          <p >Game Over! You lost. The number was {randomNumber}.</p>
           <button onClick={handleRestart}>Restart</button>
         </>
       )}
