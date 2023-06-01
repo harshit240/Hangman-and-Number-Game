@@ -7,16 +7,15 @@ const HangmanGame = () => {
   const [guess, setGuess] = useState(''); // Player's guess
   const [tries, setTries] = useState(7); // Remaining tries
   const [gameOver, setGameOver] = useState(false); // Game over flag
-  const [won, setwon] = useState(false); // Game over flag
-  const [wonText, setwonText] = useState(false); // Game over flag
-
+  const [won, setwon] = useState(false); // Won 
+  const [wonText, setwonText] = useState(false); // Won Text 
+  const [replay,setReplay] = useState(false);
 
   useEffect(() => {
     // Select a random word from the words array
     const randomWord = words[Math.floor(Math.random() * words.length)];
     setWord(randomWord.toLowerCase());
-    // console.log(randomWord)
-  }, [won,wonText,gameOver,tries]);
+  }, [won,wonText,gameOver,tries,replay]);
 
   const handleGuess = (event) => {
     event.preventDefault();
@@ -24,7 +23,6 @@ const HangmanGame = () => {
     // Validate the guess and update the state
     if (guess.trim() !== '') {
       const guessedLetter = guess.toLowerCase();
-      console.log("Hiihi",guessedLetter)
       
       if (word.includes(guessedLetter)) {
         // Correct guess
@@ -34,13 +32,22 @@ const HangmanGame = () => {
         }
         const updatedWord = word.split('').map((letter) => (letter === guessedLetter ? letter : '_')).join('');
         setWord(updatedWord);
-      } else {
+      }
+       else {
         // Incorrect guess
         setwonText("")
         setwon(false)
+        if(tries === 0){
+          setReplay(true) //Replay
+          setTries(7);
+        }
         setTries((prevTries) => prevTries - 1);
       }
       setGuess('');
+    }else if (guess === "") {
+      setwonText("");
+      setwon(false)
+      setTries((prevTries) => prevTries - 1);
     }
 
     // Check if the word is fully guessed or all tries used
@@ -54,8 +61,10 @@ const HangmanGame = () => {
   };
 
   const handleRestart = () => {
+    if (tries === 0) {
+      setwonText("You Lost");
+    }
     setGuess('');
-    // setTries(7);
     setGameOver(false);
     const randomWord = words[Math.floor(Math.random() * words.length)];
     // console.log(randomWord);
@@ -69,7 +78,15 @@ const HangmanGame = () => {
       </span>
     ));
   };
-
+  const handleReplay = () =>{
+    setReplay(true);
+    setGuess('');
+    setGameOver(false);
+    setTries(7);
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    // console.log(randomWord);
+    setWord(randomWord.toLowerCase());
+  }
   return (
     <div style={{textAlign:"center",margin:"30px"}}>
       <h1>Hangman Game</h1>
@@ -78,21 +95,28 @@ const HangmanGame = () => {
         <div>
           <p>Guess the word by entering letters</p>
           <form onSubmit={handleGuess}>
-            <input style={{color:"black",backgroundColor:"white",padding:"10px",margin:"10px"}} type="text" value={guess} onChange={handleChange} />
-            <button style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}} type="submit">Guess</button>
+            <input style={{color:"black",backgroundColor:"white",padding:"10px",margin:"10px",outline:"none"}} type="text" value={guess} onChange={handleChange} />
+            <button style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}} className='btn' type="submit">Guess</button>
           </form>
         </div>
       ) : (
         <div>
-          <p>Game Over! You {tries === 0 ? 'lost' : `${tries} Tries remaining`}.</p>
+          <p>Game Over! You {tries === 0 ? 'lost' : `have ${tries} Tries`}</p>
           {
             won ? (
               <p>{wonText}.</p>
             ):(
-              <p></p>
+              <></>
             )
           }
-          <button onClick={handleRestart} style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}}>Restart</button>
+          {
+            tries === 0 ? (
+              <button onClick={handleReplay} style={{color:"white",backgroundColor:"Green",padding:"10px"}} className='btn' >Replay</button>
+
+            ) : (
+              <button onClick={handleRestart} style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}} className='btn' >Restart</button>
+            ) 
+          }
         </div>
       )}
     </div>

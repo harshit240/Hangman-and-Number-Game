@@ -54,15 +54,15 @@ const NumbersGame = () => {
           <p style={{textAlign:"center",margin:"30px"}}>Tries remaining: {tries}</p>
           {result && <p>{result}</p>}
           <form onSubmit={handleGuess} style={{textAlign:"center",margin:"30px"}}>
-            <input type="number" value={guess} onChange={handleChange} style={{color:"black",backgroundColor:"white",padding:"10px",margin:"10px"}}/>
-            <button type="submit" style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}}>Guess</button>
+            <input type="number" value={guess} onChange={handleChange} style={{outline:"none",color:"black",backgroundColor:"white",padding:"10px",margin:"10px"}}/>
+            <button type="submit" className='btn'  style={{color:"white",backgroundColor:"yellowGreen",padding:"10px"}}>Guess</button>
           </form>
         </div>
       )}
       {tries === 0 && (
         <>
           <p >Game Over! You lost. The number was {randomNumber}.</p>
-          <button onClick={handleRestart}>Restart</button>
+          <button onClick={handleRestart} className='btn' style={{color:"white",backgroundColor:"yellowGreen"}} >Restart</button>
         </>
       )}
     </div>
